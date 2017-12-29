@@ -21,7 +21,7 @@ class Request {
      *
      * @var string
      */
-    private $host = "https://api.pinterest.com/v1/";
+    private $host = "https://api.pinterest.com/v3/";
 
     /**
      * Access token
@@ -81,7 +81,7 @@ class Request {
         } else {
             $path = $endpoint;
         }
-
+        error_log('Pinterest API request: ' . sprintf("%s%s", $this->host, $path));
         return $this->execute("GET", sprintf("%s%s", $this->host, $path));
     }
 

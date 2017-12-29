@@ -31,6 +31,23 @@ class Pins extends Endpoint {
     }
 
     /**
+     * Search pins with keywords
+     * Example: https://api.pinterest.com/v3/search/pins/?join=via_pinner,board,pinner&page_size=50&query=Red&access_token=APIKEY
+     * Source: https://gist.github.com/iwek/7549309
+     *
+     * @access public
+     * @param  string   $query
+     * @param array     $data
+     * @throws \DirkGroenen\Pinterest\Exceptions\PinterestException
+     * @return Pin
+     */
+    public function search($query, array $data = [])
+    {
+        $response = $this->request->get(sprintf("search/pins/?join=via_pinner,board,pinner&page_size=50&query=%s", $query), $data);
+        var_dump($response);
+        return new Pin($this->master, $response);
+    }
+    /**
      * Get all pins from the given board
      *
      * @access public
